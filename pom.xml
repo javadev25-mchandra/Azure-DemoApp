@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.3.2</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.td.wipro.azure.app</groupId>
+	<artifactId>Azure-DemoApp</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Azure-DemoApp</name>
+	<description>Demo project for Spring Boot</description>
+	<url />
+	<licenses>
+		<license />
+	</licenses>
+	<developers>
+		<developer />
+	</developers>
+	<scm>
+		<connection />
+		<developerConnection />
+		<tag />
+		<url />
+	</scm>
+	<properties>
+		<java.version>21</java.version>
+		<spring-cloud-azure.version>5.15.0</spring-cloud-azure.version>
+		<spring-cloud.version>2023.0.3</spring-cloud.version>
+
+		<!-- Spring Boot start class. WARNING: correct class must be set -->
+		<start-class>com.td.wipro.azure.app.Azure.DemoApp</start-class>
+
+		<!-- customize those properties. WARNING: the functionAppName should be
+		unique across Azure -->
+		<azure.functions.maven.plugin.version>1.29.0</azure.functions.maven.plugin.version>
+		<functionResourceGroup>my-spring-function-resource-group</functionResourceGroup>
+		<functionAppServicePlanName>my-spring-function-service-plan</functionAppServicePlanName>
+		<functionAppName>my-spring-function</functionAppName>
+		<functionPricingTier>Y1</functionPricingTier>
+		<functionAppRegion>eastus</functionAppRegion>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.azure.spring</groupId>
+			<artifactId>spring-cloud-azure-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.azure.spring</groupId>
+			<artifactId>spring-cloud-azure-starter-keyvault</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-function-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/com.microsoft.azure/azure-client-runtime -->
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>azure-client-runtime</artifactId>
+			<version>1.7.14</version>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/com.microsoft.azure/azure-client-authentication -->
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>azure-client-authentication</artifactId>
+			<version>1.7.14</version>
+			<scope>test</scope>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/com.microsoft.azure/azure-mgmt-resources -->
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>azure-mgmt-resources</artifactId>
+			<version>1.41.4</version>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/com.microsoft.azure/azure-arm-client-runtime -->
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>azure-arm-client-runtime</artifactId>
+			<version>1.7.14</version>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/com.microsoft.azure.functions/azure-functions-java-library -->
+		<dependency>
+			<groupId>com.microsoft.azure.functions</groupId>
+			<artifactId>azure-functions-java-library</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/com.microsoft.azure.functions/azure-functions-java-core-library -->
+		<dependency>
+			<groupId>com.microsoft.azure.functions</groupId>
+			<artifactId>azure-functions-java-core-library</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/com.microsoft.azure.functions/azure-functions-java-spi -->
+		<dependency>
+			<groupId>com.microsoft.azure.functions</groupId>
+			<artifactId>azure-functions-java-spi</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.azure.spring</groupId>
+				<artifactId>spring-cloud-azure-dependencies</artifactId>
+				<version>${spring-cloud-azure.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
